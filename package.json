@@ -1,0 +1,15 @@
+{
+  "name": "Booksly",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "repository": "git@github.com:ananta/booksly.git",
+  "author": "ananta <12180395+ananta@users.noreply.github.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^8.1.3"
+  }
+}
