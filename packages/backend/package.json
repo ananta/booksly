@@ -8,6 +8,7 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:e2e": "jest --testPathPattern=./src/e2e",
     "build": "tsc --build",
     "start": "tsc && node dist/index.js",
     "start:dev": "nodemon ./src/index.ts"
