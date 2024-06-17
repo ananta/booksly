@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto'
+import { IBook } from '../controllers/books'
 
-export const books = [
+export const books: IBook[] = [
   {
     id: randomUUID(),
     title: 'this is a random title',
