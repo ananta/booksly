@@ -2,7 +2,7 @@ import Joi from 'joi'
 import { NextFunction, Request, Response } from 'express'
 
 import ResponseWrapper from '../utils/responseWrapper'
-import { BookIdentifier } from '../types/books'
+import { BookIdentifier } from 'shared/types/books'
 
 /**
  * Middleware to validate request body against a given Joi schema.
@@ -27,10 +27,7 @@ export const validate =
 export const newBookSchema = Joi.object().keys({
   title: Joi.string().min(3).max(80).required().label('Title'),
   author: Joi.string().min(2).max(80).required().label('Author'),
-  publishedYear: Joi.date()
-    .required()
-    .less(Date.now() + 1000)
-    .label('Published Year'),
+  publishedYear: Joi.date().required().label('Published Year'),
   genre: Joi.string().min(3).max(40).required().label('Genre')
 })
 
@@ -40,5 +37,6 @@ export const newBookSchema = Joi.object().keys({
 export const updateBookSchema = Joi.object().keys({
   title: Joi.string().min(3).max(80).label('Title'),
   author: Joi.string().min(2).max(80).label('Author'),
-  genre: Joi.string().min(3).max(40).label('Genre')
+  genre: Joi.string().min(3).max(40).label('Genre'),
+  publishedYear: Joi.date().label('Published Year')
 })
