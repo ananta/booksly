@@ -12,10 +12,12 @@
 import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 
+import { Header } from 'components/layout/header'
 
 export const Layout: React.FC<{}> = () => {
   return (
     <>
+      <Header />
       <main>
         <Suspense fallback={<div>loading...</div>}>
           <Outlet />

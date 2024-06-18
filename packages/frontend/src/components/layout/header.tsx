@@ -10,6 +10,10 @@
  */
 
 import { Link, useLocation } from 'react-router-dom'
+import { ArrowLeft, Plus } from 'lucide-react'
+
+import { buttonVariants } from 'components/ui/button'
+
 export const Header: React.FC<{}> = () => {
   let location = useLocation()
   return (
@@ -21,6 +25,19 @@ export const Header: React.FC<{}> = () => {
             track your books!
           </h3>
         </Link>
+        {location.pathname === '/' ? (
+          <Link
+            to={'/manage-book'}
+            state={{ type: 'create' }}
+            className={buttonVariants({ variant: 'default' })}
+          >
+            <Plus className="mr-2" /> Create Book
+          </Link>
+        ) : (
+          <Link to={'/'} className={buttonVariants({ variant: 'outline' })}>
+            <ArrowLeft className="mr-2" /> Go Back
+          </Link>
+        )}
       </nav>
     </>
   )
