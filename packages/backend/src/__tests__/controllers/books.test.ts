@@ -12,10 +12,17 @@ jest.mock('node:crypto', () => ({
   randomUUID: jest.fn(() => 'random-uuid')
 }))
 
+/**
+ * Test suite for Books Controller
+ */
 describe('Books Controller', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
+
+  /**
+   * Test suite for getBooks function
+   */
   describe('getBooks', () => {
     it('should return an array of books', async () => {
       await getBooks(mockRequest, mockResponse)
@@ -23,6 +30,9 @@ describe('Books Controller', () => {
     })
   })
 
+  /**
+   * Test suite for createBook function
+   */
   describe('createBook', () => {
     it('should create a new book', async () => {
       const newBook = {
@@ -43,6 +53,9 @@ describe('Books Controller', () => {
     })
   })
 
+  /**
+   * Test suite for updateBook function
+   */
   describe('updateBook', () => {
     it('should update the book', async () => {
       const bookIndex = 0
@@ -67,6 +80,9 @@ describe('Books Controller', () => {
     })
   })
 
+  /**
+   * Test suite for removeBook function
+   */
   describe('removeBook', () => {
     it('should delete a book', async () => {
       const bookIndex = 0
@@ -81,6 +97,9 @@ describe('Books Controller', () => {
       )
     })
 
+    /**
+     * Test suite for resolveBook function
+     */
     describe('resolveBook', () => {
       it('should resolve a book by id', () => {
         const bookToResolve = books[0]

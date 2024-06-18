@@ -1,34 +1,17 @@
 import { randomUUID } from 'node:crypto'
 import { NextFunction, Request, Response } from 'express'
 
+import { IBook, BookIdentifier } from '../types/books'
 import ResponseWrapper from '../utils/responseWrapper'
 import { books } from '../constants/books'
 
-export interface IBook {
-  id: string
-  title: string
-  author: string
-  publishedYear: string
-  genre: string
-}
-
-export interface IBookInfo {
-  bookIndex: number
-  book: IBook
-}
-
-export type BookRequest = IBookInfo & Request
-
-export interface BookIdentifier {
-  id: string
-}
-
 /**
+ * Get all books.
  *
- * @param req
- * @param res
+ * @param _request - The incoming request object.
+ * @param response - The outgoing response object.
+ * @returns A JSON response containing an array of books.
  */
-
 export async function getBooks(
   _request: Request,
   response: Response
@@ -36,6 +19,13 @@ export async function getBooks(
   return response.json(books)
 }
 
+/**
+ * Get a specific book.
+ *
+ * @param request - The incoming request object.
+ * @param response - The outgoing response object.
+ * @returns A JSON response containing the requested book.
+ */
 export async function getBook(
   request: Request<{}, {}, IBook>,
   response: Response
@@ -45,6 +35,13 @@ export async function getBook(
   )
 }
 
+/**
+ * Create a new book.
+ *
+ * @param request - The incoming request object.
+ * @param response - The outgoing response object.
+ * @returns A JSON response containing the created book.
+ */
 export async function createBook(
   request: Request<{}, {}, IBook>,
   response: Response
@@ -55,6 +52,13 @@ export async function createBook(
   return response.json(ResponseWrapper<{ book: IBook }>(true, { book }))
 }
 
+/**
+ * Update an existing book.
+ *
+ * @param request - The incoming request object.
+ * @param response - The outgoing response object.
+ * @returns A JSON response indicating the update status.
+ */
 export async function updateBook(
   request: Request<BookIdentifier>,
   response: Response
@@ -66,6 +70,13 @@ export async function updateBook(
   )
 }
 
+/**
+ * Remove a book.
+ *
+ * @param request - The incoming request object.
+ * @param response - The outgoing response object.
+ * @returns A JSON response indicating the removal status.
+ */
 export async function removeBook(
   request: Request<BookIdentifier>,
   response: Response
@@ -77,7 +88,15 @@ export async function removeBook(
   )
 }
 
-export function resolveBook(
+/**
+ * Resolve a book by its ID.
+ *
+ * @param request - The incoming request object.
+ * @param response - The outgoing response object.
+ * @param next - The next middleware function.
+ * @returns Calls the next middleware function or sends an error response.
+ */
+export async function resolveBook(
   request: Request<BookIdentifier>,
   response: Response,
   next: NextFunction
