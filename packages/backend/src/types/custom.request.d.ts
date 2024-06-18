@@ -6,7 +6,7 @@
 
 import * as express from 'express-serve-static-core'
 
-import { IBookResolveRequest } from '../types/books'
+import { IBookResolveRequest } from 'shared/types/books'
 
 // We are adding optional value to the request object for easy middleware parsing
 declare global {

@@ -1,9 +1,9 @@
 import { randomUUID } from 'node:crypto'
 import { NextFunction, Request, Response } from 'express'
 
-import { IBook, BookIdentifier } from '../types/books'
+import { IBook, BookIdentifier } from 'shared/types/books'
+import { books } from 'shared'
 import ResponseWrapper from '../utils/responseWrapper'
-import { books } from '../constants/books'
 
 /**
  * Get all books.
