@@ -19,11 +19,16 @@ import { Calendar } from 'components/ui/calendar'
 import { Input } from 'components/ui/input'
 import { Button } from 'components/ui/button'
 import { cn } from 'utils/twMerge'
+
 import { IManageBookRouteState } from 'types/routestate'
+import { useBookStore } from 'store/bookStore'
 import { bookFormSchema } from './validation'
+
 export default function BookForm() {
   const { state }: { state: IManageBookRouteState } = useLocation()
   const navigate = useNavigate()
+  const { createBook, isLoading, updateBook } = useBookStore()
+
   const form = useForm<z.infer<typeof bookFormSchema>>({
     resolver: zodResolver(bookFormSchema),
     defaultValues: {
@@ -37,7 +42,12 @@ export default function BookForm() {
   })
 
   function onSubmit(values: z.infer<typeof bookFormSchema>) {
+    if (state.type === 'create') createBook(values, () => navigate(-1))
+    else if (state.type === 'edit')
+      updateBook({ ...values, id: state.id }, () => navigate(-1))
+    return
   }
+
   return (
     <>
       <h2 className="mb-4">
