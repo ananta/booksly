@@ -6,11 +6,11 @@
 
 import * as express from 'express-serve-static-core'
 
-import { IBookInfo } from '../controllers/books'
+import { IBookResolveRequest } from '../types/books'
 
 // We are adding optional value to the request object for easy middleware parsing
 declare global {
   namespace Express {
-    interface Request extends IBookInfo {}
+    interface Request extends IBookResolveRequest {}
   }
 }

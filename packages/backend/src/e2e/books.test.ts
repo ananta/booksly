@@ -3,22 +3,34 @@ import * as express from 'express-serve-static-core'
 
 import { createApp } from '../createApp'
 import { books } from '../constants/books'
-import { IBook } from '../controllers/books'
 import { generateNewBook } from './utils'
+import { IBook } from '../types/books'
 
+/**
+ * End-to-end test suite for /books endpoint
+ */
 describe('/books', () => {
   let app: express.Express = createApp()
 
+  /**
+   * Setup the application instance before running tests
+   */
   beforeAll(() => {
     app = createApp()
   })
 
+  /**
+   * Test for GET /books endpoint
+   */
   it('GET /books should return all books', async () => {
     const response = await request(app).get('/books')
     expect(response.status).toBe(200)
     expect(response.body).toStrictEqual(books)
   })
 
+  /**
+   * Test for POST /books endpoint
+   */
   it('POST /books should create a new book', async () => {
     const newBook = generateNewBook()
     const response = await request(app).post('/books').send(newBook)
@@ -30,6 +42,9 @@ describe('/books', () => {
     expect(books.length).toBe(2)
   })
 
+  /**
+   * Test for PUT /books/:id endpoint
+   */
   it('PUT /books/:id should update an existing book', async () => {
     const updatedBook = { title: 'Updated Title', author: 'Updated Author' }
     const booksRes = await request(app).get('/books')
@@ -45,6 +60,9 @@ describe('/books', () => {
     expect(bookResponse.body.book.author).toBe(updatedBook.author)
   })
 
+  /**
+   * Test for DELETE /books/:id endpoint
+   */
   it('DELETE /books/:id should delete a book', async () => {
     // create a book
     const bookData = generateNewBook()
@@ -59,15 +77,20 @@ describe('/books', () => {
     expect(response.status).toBe(200)
   })
 
+  /**
+   * Test for PUT /books/:id endpoint with non-existing book
+   */
   it('PUT /books/:id should return 404 for non-existing book', async () => {
     const updatedBook = { title: 'Updated Title', author: 'Updated Author' }
     const response = await request(app)
       .put('/books/non-existing-id')
       .send({ ...updatedBook })
-    console.log({ response })
     expect(response.status).toBe(404)
   })
 
+  /**
+   * Test for DELETE /books/:id endpoint with non-existing book
+   */
   it('DELETE /books/:id should return 404 for non-existing book', async () => {
     const response = await request(app).delete('/books/non-existing-id')
     expect(response.status).toBe(404)

@@ -1,3 +1,6 @@
+/**
+ * A custom error object with `status` and `message` property
+ */
 class ErrorWithStatus extends Error {
   status: number
   message: string
