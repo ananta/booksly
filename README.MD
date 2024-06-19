@@ -31,14 +31,13 @@ cd booksly
 yarn
 ````
 
-> **Note:** Before running the `frontend` or `backend` package, be sure to build the `shared` package.
+#### Running the Project in dev mode:
+
+```sh
+yarn start:dev
+````
 
 #### Helpful scripts
-`yarn start`
-Starts the backend and frontend workspaces concurrently in production mode.
-
-`yarn start:dev`
-Starts the backend in development mode and the frontend workspaces concurrently.
 
 `yarn clean`
 Removes the output directories for shared, backend, and frontend workspaces.
@@ -48,6 +47,14 @@ Runs the `clean` script to remove output directories before the build process.
 
 `yarn build`
 Builds the shared, backend, and frontend workspaces concurrently.
+
+`yarn start`
+Starts the backend and frontend workspaces concurrently in production mode.
+
+> **Note:** Before running the `frontend` or `backend` package, be sure to build the `shared` package.
+
+`yarn start:dev`
+Starts the backend in development mode and the frontend workspaces concurrently.
 
 ### Running Tests
 ```sh
