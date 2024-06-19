@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { IBook } from '../types/books'
+import { IBook } from 'shared/types/books'
 
 /**
  * Generates a new book object without an id.
