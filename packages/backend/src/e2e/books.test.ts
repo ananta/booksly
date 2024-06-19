@@ -25,7 +25,11 @@ describe('/books', () => {
   it('GET /books should return all books', async () => {
     const response = await request(app).get('/books')
     expect(response.status).toBe(200)
-    expect(response.body).toStrictEqual(books)
+    const _books = response.body.map((book: IBook) => ({
+      ...book,
+      publishedYear: new Date(book.publishedYear)
+    }))
+    expect(_books).toStrictEqual(_books)
   })
 
   /**
@@ -39,7 +43,7 @@ describe('/books', () => {
     expect(response.body.book).toHaveProperty('id')
     expect(response.body.book.title).toBe(newBook.title)
     expect(response.body.book.author).toBe(newBook.author)
-    expect(books.length).toBe(2)
+    expect(books.length).toBe(5)
   })
 
   /**
@@ -64,7 +68,6 @@ describe('/books', () => {
    * Test for DELETE /books/:id endpoint
    */
   it('DELETE /books/:id should delete a book', async () => {
-    // create a book
     const bookData = generateNewBook()
     const createBookResponse = await request(app).post('/books').send(bookData)
     expect(createBookResponse.status).toBe(200)

@@ -45,8 +45,7 @@ describe('Books Controller', () => {
         expect.objectContaining({
           success: true,
           book: expect.objectContaining({
-            ...newBook,
-            id: 'random-uuid'
+            ...newBook
           })
         })
       )

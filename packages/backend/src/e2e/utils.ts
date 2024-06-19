@@ -9,6 +9,6 @@ import { IBook } from 'shared/types/books'
 export const generateNewBook = (): Omit<IBook, 'id'> => ({
   title: `Test Book ${randomUUID()}`,
   author: `Test Author ${randomUUID()}`,
-  publishedYear: '2024',
+  publishedYear: new Date(),
   genre: 'horror'
 })
