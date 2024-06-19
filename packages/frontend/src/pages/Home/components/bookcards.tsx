@@ -25,14 +25,20 @@ import {
 } from 'components/ui/dialog'
 
 import { IBook } from 'shared/types/books'
+import { useToast } from 'hooks/useToast'
 
 export const BookCards: React.FC<{
   book: IBook
-  handleRemove: (bookId: string, onSuccess: () => void) => void
+  handleRemove: (
+    bookId: string,
+    onSuccess: () => void,
+    onFailed: () => void
+  ) => void
 }> = ({ book, handleRemove }) => {
   const [openRemoveBookDialog, setOpenRemoveBookDialog] =
     useState<boolean>(false)
   const [selectedBookId, setSelectedBookId] = useState<string>('')
+  const { toast } = useToast()
 
   return (
     <Card key={book.id} className="flex flex-col justify-between">
@@ -88,8 +94,17 @@ export const BookCards: React.FC<{
                 type="button"
                 variant={'destructive'}
                 onClick={() =>
-                  handleRemove(selectedBookId, () =>
-                    setOpenRemoveBookDialog(false)
+                  handleRemove(
+                    selectedBookId,
+                    () => setOpenRemoveBookDialog(false),
+                    () => {
+                      toast({
+                        title: '❌ Failed to Remove Book',
+                        description:
+                          'There was an error removing your book. Please try again.'
+                      })
+                      setOpenRemoveBookDialog(false)
+                    }
                   )
                 }
               >
