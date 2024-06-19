@@ -5,9 +5,21 @@ import { customFetch } from 'utils/customFetch'
 interface IBookState {
   isLoading: boolean
   books: IBook[]
-  createBook: (newBook: Omit<IBook, 'id'>, onSuccess: () => void) => void
-  updateBook: (updatedBook: IBook, onSuccess: () => void) => void
-  removeBook: (bookId: string, onSucces: () => void) => void
+  createBook: (
+    newBook: Omit<IBook, 'id'>,
+    onSuccess: () => void,
+    onFailed: () => void
+  ) => void
+  updateBook: (
+    updatedBook: IBook,
+    onSuccess: () => void,
+    onFailed: () => void
+  ) => void
+  removeBook: (
+    bookId: string,
+    onSucces: () => void,
+    onFailed: () => void
+  ) => void
   getBooks: () => void
 }
 
@@ -26,7 +38,7 @@ export const useBookStore = create<IBookState>(set => ({
       set({ isLoading: false })
     }
   },
-  createBook: async (bookInfo: Omit<IBook, 'id'>, onSuccess) => {
+  createBook: async (bookInfo: Omit<IBook, 'id'>, onSuccess, onFailed) => {
     try {
       set({ isLoading: true })
       const data = await customFetch<{
@@ -36,7 +48,6 @@ export const useBookStore = create<IBookState>(set => ({
         method: 'POST',
         body: JSON.stringify({ ...bookInfo })
       })
-      console.log({ data })
       if (data?.book) {
         set(state => ({
           ...state,
@@ -46,10 +57,12 @@ export const useBookStore = create<IBookState>(set => ({
       }
       onSuccess()
     } catch (error) {
+      console.log({ error })
       set({ isLoading: false })
+      onFailed()
     }
   },
-  updateBook: async (updatedBook, onSuccess) => {
+  updateBook: async (updatedBook, onSuccess, onFailed) => {
     try {
       const { id, ..._updatedBook } = updatedBook
       set({ isLoading: true })
@@ -74,9 +87,10 @@ export const useBookStore = create<IBookState>(set => ({
       onSuccess()
     } catch (error) {
       set({ isLoading: false })
+      onFailed()
     }
   },
-  removeBook: async (bookId, onSuccess) => {
+  removeBook: async (bookId, onSuccess, onFailed) => {
     try {
       set({ isLoading: true })
       const data = await customFetch<{
@@ -97,6 +111,7 @@ export const useBookStore = create<IBookState>(set => ({
       onSuccess()
     } catch (err) {
       set({ isLoading: false })
+      onFailed()
     }
   }
 }))

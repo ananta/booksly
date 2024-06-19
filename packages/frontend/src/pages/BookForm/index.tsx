@@ -19,6 +19,7 @@ import { Calendar } from 'components/ui/calendar'
 import { Input } from 'components/ui/input'
 import { Button } from 'components/ui/button'
 import { cn } from 'utils/twMerge'
+import { useToast } from 'hooks/useToast'
 
 import { IManageBookRouteState } from 'types/routestate'
 import { useBookStore } from 'store/bookStore'
@@ -28,6 +29,7 @@ export default function BookForm() {
   const { state }: { state: IManageBookRouteState } = useLocation()
   const navigate = useNavigate()
   const { createBook, isLoading, updateBook } = useBookStore()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof bookFormSchema>>({
     resolver: zodResolver(bookFormSchema),
@@ -42,9 +44,34 @@ export default function BookForm() {
   })
 
   function onSubmit(values: z.infer<typeof bookFormSchema>) {
-    if (state.type === 'create') createBook(values, () => navigate(-1))
+    if (state.type === 'create')
+      createBook(
+        values,
+        () => {
+          toast({
+            title: '✅ Book Added Successfully! ',
+            description: 'Your book has been added to the collection.'
+          })
+          navigate(-1)
+        },
+        () =>
+          toast({
+            title: '❌ Failed to Add Book',
+            description:
+              'There was an error adding your book. Please try again.'
+          })
+      )
     else if (state.type === 'edit')
-      updateBook({ ...values, id: state.id }, () => navigate(-1))
+      updateBook(
+        { ...values, id: state.id },
+        () => navigate(-1),
+        () =>
+          toast({
+            title: '❌ Failed to Update Book',
+            description:
+              'There was an error updating your book. Please try again.'
+          })
+      )
     return
   }
 
