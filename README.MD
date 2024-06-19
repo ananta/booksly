@@ -7,6 +7,8 @@
 Booksly is a simple book management application designed to help users track their books seamlessly. The application features a robust backend system, an intuitive frontend interface, and shared utilities to ensure consistency and efficiency across the platform.
 
 ### Packages
+
+The project uses [yarn workspaces](https://yarnpkg.com/features/workspaces) to manage packages inside a single repository. This setup allows shared code between frontend and backend, centralized dependency management, and consistent build scripts.
 - backend: Powers the application with a REST API for managing books, built with Node.js and Express.
 - frontend: Provides a user-friendly interface for book management, built with React and TypeScript.
 - shared: Contains shared utilities, types, and constants to ensure consistency and reuse across both the backend and frontend.
@@ -14,8 +16,9 @@ Booksly is a simple book management application designed to help users track the
 ### Getting Started
 
 #### Prerequisites
-- Node.js (version 14 or later)
-- npm (version 6 or later)
+Make sure you have the following program installed on your dev system
+- [Node.js](https://nodejs.org/en)
+- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
 
 #### Scripts
 1. Clone the repository:
