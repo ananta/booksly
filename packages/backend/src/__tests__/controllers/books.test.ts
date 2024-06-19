@@ -1,5 +1,5 @@
 import { mockNextFunction, mockRequest, mockResponse } from '../../__mocks__'
-import { books } from '../../constants/books'
+import { books } from 'shared'
 import {
   createBook,
   getBooks,

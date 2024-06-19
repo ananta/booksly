@@ -2,9 +2,9 @@ import request from 'supertest'
 import * as express from 'express-serve-static-core'
 
 import { createApp } from '../createApp'
-import { books } from '../constants/books'
+import { books } from 'shared'
 import { generateNewBook } from './utils'
-import { IBook } from '../types/books'
+import { IBook } from 'shared/types/books'
 
 /**
  * End-to-end test suite for /books endpoint
