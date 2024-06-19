@@ -12,13 +12,14 @@ function handleFetchError(error: unknown) {
   if (error instanceof ResponseError) {
     // Detailed error handling based on status code
     switch (error.response.status) {
+      case 500:
+      /* Handle "Server Error" */
       case 404:
-        /* Handle "Not found" */ break
+      /* Handle "Not found" */
       case 401:
-        /* Handle "Unauthorized" */ break
+      /* Handle "Unauthorized" */
       case 418:
-        /* Handle "I'm a teapot" */ break
-      // ... other status codes ...
+        throw new Error('Something went wrong!')
       default:
         /* Handle other errors */ break
     }
