@@ -8,7 +8,6 @@ import {
 import { MessageCircleWarningIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
-import { cn } from 'utils/twMerge'
 
 export function ErrorPage() {
   const error = useRouteError()
