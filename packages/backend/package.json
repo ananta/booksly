@@ -11,7 +11,7 @@
     "test:e2e": "jest --testPathPattern=./src/e2e",
     "build": "tsc --build",
     "start": "tsc && node dist/index.js",
-    "start:dev": "nodemon ./src/index.ts"
+    "start:dev": "nodemon --exec ts-node -T ./src/index.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

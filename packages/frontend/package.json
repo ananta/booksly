@@ -65,6 +65,7 @@
     "@craco/craco": "^7.1.0",
     "craco-babel-loader": "^1.0.4",
     "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^7.0.1",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5"
   },

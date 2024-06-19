@@ -5,30 +5,37 @@ import { IBook } from './types/books'
 export const books: IBook[] = [
   {
     id: uuid(),
-    title: 'random book 1',
-    author: 'random author',
-    publishedYear: subDays(new Date(), 60),
-    genre: 'horror'
+    title: 'The Mysterious Island',
+    author: 'Jules Verne',
+    publishedYear: subDays(new Date(), 3650),
+    genre: 'Science Fiction'
   },
   {
     id: uuid(),
-    title: 'this is a random title',
-    author: 'random author',
-    publishedYear: subDays(new Date(), 120),
-    genre: 'horror'
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    publishedYear: subDays(new Date(), 21900),
+    genre: 'Fiction'
   },
   {
     id: uuid(),
-    title: 'this is a random title',
-    author: 'random author',
-    publishedYear: subDays(new Date(), 220),
-    genre: 'horror'
+    title: '1984',
+    author: 'George Orwell',
+    publishedYear: subDays(new Date(), 25550),
+    genre: 'Dystopian'
   },
   {
     id: uuid(),
-    title: 'this is a random title',
-    author: 'random author',
-    publishedYear: subDays(new Date(), 2200),
-    genre: 'horror'
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    publishedYear: subDays(new Date(), 74710),
+    genre: 'Romance'
+  },
+  {
+    id: uuid(),
+    title: 'The Catcher in the Rye',
+    author: 'J.D. Salinger',
+    publishedYear: subDays(new Date(), 25550),
+    genre: 'Fiction'
   }
 ]

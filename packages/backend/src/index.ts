@@ -1,5 +1,6 @@
 import { createApp } from './createApp'
 
+//TODO: setup environment variables with `dotenv` instead of hardcoding the port number
 const PORT = 3001
 
 /**

@@ -43,7 +43,7 @@ describe('/books', () => {
     expect(response.body.book).toHaveProperty('id')
     expect(response.body.book.title).toBe(newBook.title)
     expect(response.body.book.author).toBe(newBook.author)
-    expect(books.length).toBe(5)
+    expect(books.length).toBe(6)
   })
 
   /**
