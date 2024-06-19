@@ -8,6 +8,11 @@
   "license": "MIT",
   "scripts": {
     "start": "concurrently \"yarn workspace backend start\" \" yarn workspace frontend start\"",
+    "start:dev": "concurrently \"yarn workspace backend start:dev\" \" yarn workspace frontend start\"",
+    "clean": "rimraf packages/shared/dist packages/backend/dist packages/frontend/build",
+    "prebuild": "yarn clean",
+    "build": "concurrently \"yarn workspace shared build\" \"yarn workspace backend build\" \"yarn workspace frontend build\"",
+    "test": "yarn workspace backend test && yarn workspace frontend test",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts",
     "lint:fix": "eslint --ignore-path .eslintignore --ext .js,.ts --fix",
     "format:check": "prettier --check .",
